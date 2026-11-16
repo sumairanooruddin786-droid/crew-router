@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Query Router · CrewAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <h1>Ask once. The right expert answers.</h1>
+      <p>A router agent reads your question and hands it to a Math Expert or a Teacher.</p>
+    </header>
+
+    <section class="board" aria-label="Agent routing">
+      <svg viewBox="0 0 640 190" class="wires" aria-hidden="true">
+        <path id="wireMath" d="M150 95 C 280 95, 300 38, 430 38" />
+        <path id="wireTeach" d="M150 95 C 280 95, 300 152, 430 152" />
+      </svg>
+      <div class="node router" id="nRouter"><span class="nt">Query Router</span><span class="ns" id="sRouter">Waiting</span></div>
+      <div class="node math" id="nMath"><span class="nt">Math Expert</span><span class="ns" id="sMath">Idle</span></div>
+      <div class="node teach" id="nTeach"><span class="nt">Teacher</span><span class="ns" id="sTeach">Idle</span></div>
+    </section>
+
+    <section class="ask">
+      <label for="query" class="sr">Your question</label>
+      <textarea id="query" rows="3" placeholder="Try: Solve 3x + 7 = 22   or   What is photosynthesis?"></textarea>
+      <div class="row">
+        <div class="chips">
+          <button class="chip" data-q="Solve 3x + 7 = 22">Solve 3x + 7 = 22</button>
+          <button class="chip" data-q="What is the derivative of x^2 + 3x?">Derivative of x² + 3x</button>
+          <button class="chip" data-q="What is photosynthesis?">What is photosynthesis?</button>
+          <button class="chip" data-q="Explain how a neural network learns">How a neural network learns</button>
+        </div>
+        <button id="askBtn" class="go">Send to router</button>
+      </div>
+    </section>
+
+    <section id="out" class="out hidden" aria-live="polite">
+      <div class="meta"><span id="badge" class="badge"></span><span id="who" class="who"></span></div>
+      <div id="answer" class="answer"></div>
+    </section>
+
+    <section id="histWrap" class="hist hidden">
+      <div class="hh"><h2>Earlier questions</h2><button id="clear" class="link">Clear history</button></div>
+      <ul id="hist"></ul>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
